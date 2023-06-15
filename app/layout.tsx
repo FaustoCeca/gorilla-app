@@ -20,7 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
       <SidebarMenu />
       <HeaderLine />
-      <div className='pb-10 pt-10'>
+      <div className='pb-10'>
         {children}
       </div>
       </body>

@@ -21,7 +21,7 @@ const HeaderLine = () => {
                     </g>
             </g>
         </svg>
-        <h2 className="text-yellow-50 font-bold cursor-pointer ">
+        <h2 className="text-yellow-50 font-bold cursor-pointer uppercase">
             Gorila Burguer
         </h2>
         <svg 
