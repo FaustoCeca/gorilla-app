@@ -1,5 +1,10 @@
+'use client'
+import useSidebarMenu from "../hooks/useSidebarMenu";
 
 const HeaderLine = () => {
+  const { onClose, onOpen } = useSidebarMenu();
+
+
   return (
     <div className="flex bg-slate-800 flex-row w-full p-4 items-center justify-between">
         <svg className="fill-white w-6 h-6 cursor-pointer" viewBox="0 0 10 16" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -19,7 +24,9 @@ const HeaderLine = () => {
         <h2 className="text-yellow-50 font-bold cursor-pointer ">
             Gorila Burguer
         </h2>
-        <svg className="cursor-pointer w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12">
+        <svg 
+            onClick={onOpen}
+        className="cursor-pointer w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12">
             <g fill="white" fill-rule="nonzero">
                 <path d="M.686 6.5C.307 6.5 0 6.164 0 5.75S.307 5 .686 5h14.628c.379 0 .686.336.686.75s-.307.75-.686.75H.686zM.686 1.5C.307 1.5 0 1.164 0 .75S.307 0 .686 0h14.628c.379 0 .686.336.686.75s-.307.75-.686.75H.686zM.686 11.5c-.379 0-.686-.336-.686-.75S.307 10 .686 10h14.628c.379 0 .686.336.686.75s-.307.75-.686.75H.686z"></path>
             </g>

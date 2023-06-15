@@ -1,4 +1,5 @@
 import HeaderLine from './components/HeaderLine'
+import SidebarMenu from './components/Menu/SidebarMenu'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -16,8 +17,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <body className={inter.className}>
+      <SidebarMenu />
       <HeaderLine />
-      <body className={inter.className}>{children}</body>
+      <div className='pb-10 pt-10'>
+        {children}
+      </div>
+      </body>
     </html>
   )
 }
