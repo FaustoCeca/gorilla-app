@@ -1,16 +1,24 @@
+'use client';
+
 import { MdOutlineDeliveryDining } from 'react-icons/md';
 import {AiOutlineShopping} from 'react-icons/ai';
+import Link from 'next/link';
 
 
 interface BranchCardProps {
     title: string;
     address: string;
+    id: string;
 }
 
 
-const BranchCard = ({title, address}: BranchCardProps) => {
-  return (
-    <div className="rounded-md bg-white m-4 p-4 shadow-md cursor-pointer">
+const BranchCard = ({title, address, id}: BranchCardProps) => {
+    
+    return (
+        <Link href={`/sucursal/${id}`}>
+    <div
+        className="rounded-md bg-white m-4 p-4 shadow-md cursor-pointer"
+    >
         <h3 className="text-black text-2xl font-semibold">
             {title}
         </h3>
@@ -33,6 +41,8 @@ const BranchCard = ({title, address}: BranchCardProps) => {
             </p>
         </div>
     </div>
+    </Link>
+
   )
 }
 

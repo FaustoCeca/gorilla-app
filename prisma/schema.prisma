@@ -17,8 +17,9 @@ model Branch {
   name      String
   address   String
   phone     String
-  products  Product[]
+
   orders    Order[]
+  products  Product[]
 }
 
 model Order {
@@ -31,8 +32,8 @@ model Order {
   phone     String
   total     Float
   products  Product[]
-
-  
+  branchId  String? @db.ObjectId
+    
   branch    Branch? @relation(fields: [branchId], references: [id], onDelete: Cascade)
 }
 
@@ -44,7 +45,20 @@ model Product {
   price     Float
   quantity  Int 
   image     String 
+  orderId   String?  @db.ObjectId
+  branchId  String?  @db.ObjectId
+
+  branch    Branch? @relation(fields: [branchId], references: [id])
   order     Order? @relation(fields: [orderId], references: [id])
-  orderId   String? 
 }
 
+model Admin {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  email     String   @unique
+  emailVerified DateTime?
+  hashedPassword  String
+  role      String
+}

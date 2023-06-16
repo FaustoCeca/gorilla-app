@@ -14,10 +14,12 @@ export default function Home() {
         <BranchCard 
           title="Gorilla house funes" 
           address="Funes 1234"
+          id="funes"
         />
         <BranchCard 
           title="Gorilla house centro" 
           address="Funes 1234"
+          id="centro"
         />
       </div>
     </main>

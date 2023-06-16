@@ -15,17 +15,22 @@ const SidebarMenu = () => {
                     Gorilla app
                     </h3>
                     <Link className="text-grey-700 hover:text-red-700" href="/">
-                    Inicio
+                        Inicio
                     </Link>
-                    <Link className="text-grey-700 hover:text-red-700" href="/">
-                    Registrarse
+                    <Link className="text-grey-700 hover:text-red-700" href="/sucursal/rosario">
+                        Sucursal Rosario
                     </Link>
-                    <Link className="text-grey-700 hover:text-red-700" href="/">
-                    Ingresar
+                    <Link className="text-grey-700 hover:text-red-700" href="/sucursal/fisherton">
+                        Sucursal Fisherton
                     </Link>
                 </div>
                 <div className="font-light text-gray-800">
-                    Terminos y condiciones
+                    <p>
+                        <span>Vendedor?</span> Ingresa
+                    </p>                    
+                    <p>
+                        Terminos y condiciones
+                    </p>
                 </div>
             </div>
         </>

@@ -26,7 +26,7 @@ const Menu = ({isOpen, onClose, content}: SidebarMenuProps) => {
   }, [onClose]);
 
   return (
-    <div className={`absolute h-[100vh] w-full sm:w-[40vw] md:w-[30vw] lg:w-[20vw] bg-white pl-9 py-7
+    <div className={`absolute h-[100vh] z-40 w-full sm:w-[40vw] md:w-[30vw] lg:w-[20vw] bg-white pl-9 py-7
       transition-all duration-300 ease-in-out transform overflow-x-hidden ${isOpen ? 'left-0' : 'left-[-100%]'}`}>
         <button
           onClick={handleClose}
