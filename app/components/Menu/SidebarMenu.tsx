@@ -3,9 +3,13 @@
 import Menu from './Menu';
 import Link from 'next/link';
 import useSidebarMenu from '@/app/hooks/useSidebarMenu';
+import useLoginModal from '@/app/hooks/useLoginModal';
+import useRegisterModal from '@/app/hooks/useRegisterModal';
 
 const SidebarMenu = () => {
     const { isOpen, onClose, onOpen } = useSidebarMenu();
+    const loginModal = useLoginModal();
+    const registerModal = useRegisterModal();
 
     const sidebarContent = (
         <>
@@ -25,7 +29,16 @@ const SidebarMenu = () => {
                     </Link>
                 </div>
                 <div className="font-light text-gray-800">
-                    <p>
+                    <p
+                        onClick={registerModal.onOpen}
+                        className="cursor-pointer hover:text-red-700 transition flex items-center gap-1"
+                    >
+                        Registro
+                    </p>
+                    <p
+                        onClick={loginModal.onOpen}
+                        className="cursor-pointer hover:text-red-700 transition flex items-center gap-1"
+                    >
                         <span>Vendedor?</span> Ingresa
                     </p>                    
                     <p>

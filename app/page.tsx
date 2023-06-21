@@ -1,8 +1,15 @@
 import BranchCard from "./components/Home/BranchCard";
 import StartFilters from "./components/Home/StartFilters";
+import { getBranches } from "./helpers/getBranches";
 
 
-export default function Home() {
+export default async function Home() {
+
+  const branches = await getBranches();
+
+
+  console.log(branches);
+
   return (
     <main>
       <StartFilters />
@@ -11,16 +18,16 @@ export default function Home() {
       </h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 px-10 lg:px-32">
 
-        <BranchCard 
-          title="Gorilla house funes" 
-          address="Funes 1234"
-          id="funes"
-        />
-        <BranchCard 
-          title="Gorilla house centro" 
-          address="Funes 1234"
-          id="centro"
-        />
+        {
+          branches.map((branch) => (
+            <BranchCard 
+              key={branch.id} 
+              title={branch.name}
+              address={branch.address}
+              id={branch.id}
+            />
+          ))
+        }
       </div>
     </main>
   )

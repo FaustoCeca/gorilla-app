@@ -43,8 +43,9 @@ model Product {
   updatedAt DateTime @updatedAt
   name      String
   price     Float
-  quantity  Int 
-  image     String 
+  quantity  Int?
+  available Boolean
+  image     String
   orderId   String?  @db.ObjectId
   branchId  String?  @db.ObjectId
 
@@ -56,9 +57,8 @@ model Admin {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  name      String
   email     String   @unique
   emailVerified DateTime?
   hashedPassword  String
-  role      String
+  // role      String
 }
