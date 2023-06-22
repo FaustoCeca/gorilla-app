@@ -3,10 +3,10 @@
 import { IconType } from "react-icons";
 
 interface CategoryInputProps {
-    label: string;
-    icon: IconType;
-    selected: boolean;
-    onClick: (value: string) => void;
+  label: string;
+  icon: IconType;
+  selected: boolean;
+  onClick: (value: string) => void;
 }
 
 const CategoryInput = ({label, selected, icon: Icon, onClick}: CategoryInputProps) => {

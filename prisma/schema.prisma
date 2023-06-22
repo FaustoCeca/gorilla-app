@@ -18,50 +18,50 @@ model Branch {
   address   String
   phone     String
 
-  orders    Order[]
-  products  Product[]
+  orders   Order[]
+  products Product[]
 }
 
 model Order {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   status    String
   client    String
   address   String
   phone     String
   total     Float
   products  Product[]
-  branchId  String? @db.ObjectId
-    
-  branch    Branch? @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  branchId  String?   @db.ObjectId
+
+  branch Branch? @relation(fields: [branchId], references: [id], onDelete: Cascade)
 }
 
 model Product {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  name        String
   description String
-  price     Float
-  quantity  Int?
-  category  String
-  available Boolean
-  featured  Boolean?
-  image     String
-  orderId   String?  @db.ObjectId
-  branchId  String?  @db.ObjectId
+  price       Int
+  quantity    Int?
+  category    String
+  available   Boolean
+  featured    Boolean?
+  image       String
+  orderId     String?  @db.ObjectId
+  branchId    String?  @db.ObjectId
 
-  branch    Branch? @relation(fields: [branchId], references: [id])
-  order     Order? @relation(fields: [orderId], references: [id])
+  branch Branch? @relation(fields: [branchId], references: [id])
+  order  Order?  @relation(fields: [orderId], references: [id])
 }
 
 model Admin {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  email     String   @unique
-  emailVerified DateTime?
-  hashedPassword  String
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  email          String    @unique
+  emailVerified  DateTime?
+  hashedPassword String
   // role      String
 }

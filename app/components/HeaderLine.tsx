@@ -1,4 +1,5 @@
 'use client'
+import { useRouter } from "next/navigation";
 import useSidebarMenu from "../hooks/useSidebarMenu";
 import { SafeAdmin } from "../types";
 import AdminMenu from "./AdminMenu";
@@ -9,6 +10,7 @@ interface HeaderLineProps {
 
 const HeaderLine = ({ currentUser }: HeaderLineProps) => {
   const { onClose, onOpen } = useSidebarMenu();
+  const router = useRouter();
 
   return (
     <div className="flex bg-slate-800 flex-row w-full p-4 items-center justify-between">
@@ -26,7 +28,10 @@ const HeaderLine = ({ currentUser }: HeaderLineProps) => {
                     </g>
             </g>
         </svg>
-        <h2 className="text-yellow-50 font-bold cursor-pointer uppercase">
+        <h2
+          onClick={() => router.push('/')} 
+          className="text-yellow-50 font-bold cursor-pointer uppercase"
+        >
             Gorila Burguer
         </h2>
         <div className="flex flex-row gap-5 items-center">

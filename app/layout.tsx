@@ -34,7 +34,7 @@ export default async function RootLayout({
       <AdminLoginModal />
       <BranchModal />
       <ProductModal />
-      <div  className='pb-10'>
+      <div>
         {children}
       </div>
       </body>

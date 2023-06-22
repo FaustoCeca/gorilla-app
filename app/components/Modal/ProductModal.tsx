@@ -29,10 +29,11 @@ const ProductModal = () => {
   const { register, handleSubmit, setValue, watch, formState: { errors }, reset } = useForm<FieldValues>({
     defaultValues: {
       category: '' as string,
-      title: '',
+      name: '',
       description: '',
       imageSrc: '',
       price: 1,
+      available: true,
     }
   });
 

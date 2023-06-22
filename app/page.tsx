@@ -7,9 +7,6 @@ export default async function Home() {
 
   const branches = await getBranches();
 
-
-  console.log(branches);
-
   return (
     <main>
       <StartFilters />
@@ -17,7 +14,6 @@ export default async function Home() {
         Sucursales
       </h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 px-10 lg:px-32">
-
         {
           branches.map((branch) => (
             <BranchCard 

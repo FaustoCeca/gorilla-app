@@ -7,6 +7,7 @@ import { signOut } from 'next-auth/react';
 import { SafeAdmin } from '../types';
 import useBranchModal from '../hooks/useBranchModal';
 import useProductModal from '../hooks/useProductModal';
+import { useRouter } from 'next/navigation';
 
 interface AdminMenuProps {
     currentUser?: any;
@@ -16,6 +17,7 @@ const AdminMenu = ({ currentUser }: AdminMenuProps) => {
     const [isOpen, setIsOpen] = useState(false);
     const branchModal = useBranchModal();
     const productModal = useProductModal();
+    const router = useRouter();
 
     const handleOpen = useCallback(() => {
         setIsOpen( (value) => !value );
@@ -47,7 +49,7 @@ const AdminMenu = ({ currentUser }: AdminMenuProps) => {
                                 <>
                                     <MenuItem label="Agregar nueva sucursal" onClick={handleBranch} />
                                     <MenuItem label="Agregar nuevo producto" onClick={handleProduct} />
-                                    <MenuItem label="Lista de productos" onClick={ () => {}} />
+                                    <MenuItem label="Lista de productos" onClick={ () => router.push('/lista-de-productos') } />
                                     <MenuItem label="Productos por sucursal" onClick={ () => {}} />
                                     <MenuItem label="Lista de sucursales" onClick={ () => {}} />
                                     <MenuItem label="Lista de ordenes" onClick={ () => {}} />
