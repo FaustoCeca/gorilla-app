@@ -42,9 +42,12 @@ model Product {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name      String
+  description String
   price     Float
   quantity  Int?
+  category  String
   available Boolean
+  featured  Boolean?
   image     String
   orderId   String?  @db.ObjectId
   branchId  String?  @db.ObjectId

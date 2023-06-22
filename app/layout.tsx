@@ -7,6 +7,7 @@ import ToasterProvider from './providers/ToasterProvider'
 import { getCurrentUser } from './helpers/getCurrentUser'
 import AdminLoginModal from './components/Modal/AdminLoginModal'
 import BranchModal from './components/Modal/BranchModal'
+import ProductModal from './components/Modal/ProductModal'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -32,6 +33,7 @@ export default async function RootLayout({
       <AdminModalRegister />
       <AdminLoginModal />
       <BranchModal />
+      <ProductModal />
       <div  className='pb-10'>
         {children}
       </div>
