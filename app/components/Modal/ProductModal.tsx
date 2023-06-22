@@ -11,6 +11,7 @@ import Heading from "../Heading";
 import CategoryInput from "../Inputs/CategoryInput";
 import Modal from "./Modal";
 import Input from "../Inputs/Input";
+import ImageUpload from "../Inputs/ImageUpload";
 
 enum Steps {
     Category = 1,
@@ -36,6 +37,7 @@ const ProductModal = () => {
   });
 
   const category = watch('category');
+  const imageSrc = watch('imageSrc');
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -139,14 +141,35 @@ const ProductModal = () => {
         bodyContent = (
             <div className="flex flex-col gap-8">
                 <Heading title="Imagenes del producto" subtitle="Agrega imagenes para el producto" />
-                
+                <ImageUpload
+                    value={imageSrc}
+                    onChange={(value) => setCustomValue('imageSrc', value)} 
+                />
+            </div>
+        )
+    }
+
+    if (step === Steps.Price) {
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading title="Precio del producto" subtitle="Agrega el precio del producto, puede cambiarse despues" />
+                <Input 
+                    id="price"
+                    label="Precio del producto"
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    required
+                    type="number"
+                    formatPrice
+                />
             </div>
         )
     }
 
 
     return (
-        <Modal  
+        <Modal
             actionLabel={actionLabel}
             isOpen={productModal.isOpen}
             onClose={productModal.onClose}
