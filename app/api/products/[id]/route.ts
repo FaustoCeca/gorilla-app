@@ -2,15 +2,14 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/app/libs/prismadb";
 
 interface IParams {
-    id: string | undefined;
+    id: string;
 }
 
-export async function PUT( req : NextRequest, params: IParams ) {
+export async function PUT( req : NextRequest,  { params }: { params:IParams } ) {
     const body = await req.json();
-
     const priceNumber = Number(body.price);
+    const availableBoolean = Boolean(body.available);
 
-    console.log(params.id);
 
     const updatedProduct = await prisma.product.update({
         where: {
@@ -22,7 +21,7 @@ export async function PUT( req : NextRequest, params: IParams ) {
             image: body.image,
             category: body.category,
             price: priceNumber,
-            available: body.available,
+            available: availableBoolean,
         },
     });
 

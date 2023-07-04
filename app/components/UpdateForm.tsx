@@ -56,6 +56,7 @@ const UpdateForm = ({ id, name, description, available, image, price, categoryPr
 
             toast.success('Producto actualizado correctamente');
             router.push('/lista-de-productos');
+            router.refresh();
             reset();
         } catch (error: any) {
             toast.error('Algo salió mal!');
@@ -137,7 +138,6 @@ const UpdateForm = ({ id, name, description, available, image, price, categoryPr
                         </h2>
                         <select
                             className="w-full p-2 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                            {...register('available')}
                         >
                             <option value="true">Disponible</option>
                             <option value="false">No disponible</option>

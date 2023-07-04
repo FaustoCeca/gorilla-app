@@ -5,7 +5,7 @@ interface IParams {
     id: string;
 }
 
-const EditPage = async ({ params }: {params:IParams}) => {
+const EditPage = async ({ params }: { params:IParams }) => {
     const product = await getProdById(params);
 
     return (

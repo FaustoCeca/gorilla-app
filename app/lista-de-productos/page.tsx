@@ -5,6 +5,8 @@ import CategoryTitle from '../components/CategoryTitle';
 export default async function ListaDeProductosPage () {
     const products = await getProducts();
 
+    console.log(products);
+
     return (
     <div className='flex flex-col items-center justify-center px-20'>
         <h2 className='my-3 font-bold text-2xl text-red-500'>Lista de productos</h2>
