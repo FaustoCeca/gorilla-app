@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { getCurrentUser } from "../helpers/getCurrentUser";
 
 interface ProductCardProps {
     name: string;
@@ -11,9 +12,10 @@ interface ProductCardProps {
     availableProp: boolean;
     category: string;
     id: string;
+    showEditButton?: boolean;
 }
 
-const ProductCard = ({ name, description, price, image, availableProp, category, id }: ProductCardProps) => {
+const ProductCard = ({ name, description, price, image, availableProp, category, id, showEditButton }: ProductCardProps) => {
     const router = useRouter();
 
     return (
@@ -49,12 +51,16 @@ const ProductCard = ({ name, description, price, image, availableProp, category,
                     </p>
                 )
             }
-            <button
-                className="bg-slate-500 text-white rounded-xl px-4 py-2"
-                onClick={() => router.push(`/editar/${id}`)}
-            >
-                Editar
-            </button>
+            {
+                showEditButton && (
+                    <button
+                    className="bg-slate-500 text-white rounded-xl px-4 py-2"
+                    onClick={() => router.push(`/editar/${id}`)}
+                    >
+                        Editar
+                    </button>
+                )
+            }
         </div>
     </div>
   )

@@ -68,6 +68,14 @@ const BranchModal = () => {
                 required
                 errors={errors}
             />
+            <Input
+                id="schedule"
+                label="Horario"
+                disabled={isLoading}
+                register={register}
+                required
+                errors={errors}
+            />
         </div>
     )
 

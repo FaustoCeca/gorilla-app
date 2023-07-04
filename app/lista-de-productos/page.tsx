@@ -1,11 +1,13 @@
 import { getProducts } from '../helpers/getProducts';
 import ProductCard from '../components/ProductCard';
 import CategoryTitle from '../components/CategoryTitle';
+import { getCurrentUser } from '../helpers/getCurrentUser';
 
 export default async function ListaDeProductosPage () {
     const products = await getProducts();
+    const currentUser = await getCurrentUser();
 
-    console.log(products);
+    console.log(currentUser);
 
     return (
     <div className='flex flex-col items-center justify-center px-20'>
@@ -23,6 +25,7 @@ export default async function ListaDeProductosPage () {
                     image={product.image}
                     availableProp={product.available}
                     category={product.category}
+                    showEditButton={true}
                 />
             )
             )
@@ -39,6 +42,7 @@ export default async function ListaDeProductosPage () {
                     image={product.image}
                     availableProp={product.available}
                     category={product.category}
+                    showEditButton={true}
                 />
             )
             )
@@ -55,6 +59,7 @@ export default async function ListaDeProductosPage () {
                     image={product.image}
                     availableProp={product.available}
                     category={product.category}
+                    showEditButton={true}
                 />
             )
             )

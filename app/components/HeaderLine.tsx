@@ -5,7 +5,7 @@ import { SafeAdmin } from "../types";
 import AdminMenu from "./AdminMenu";
 
 interface HeaderLineProps {
-    currentUser: any;
+  currentUser: any;
 }
 
 const HeaderLine = ({ currentUser }: HeaderLineProps) => {

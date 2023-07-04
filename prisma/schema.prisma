@@ -17,6 +17,7 @@ model Branch {
   name      String
   address   String
   phone     String
+  schedule  String
 
   orders   Order[]
   products Product[]
