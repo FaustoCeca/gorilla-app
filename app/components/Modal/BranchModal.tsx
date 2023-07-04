@@ -32,13 +32,11 @@ const BranchModal = () => {
             branchModal.onClose();
             setIsLoading(false);
 
-            console.log(response);
 
             toast.success("Sucursal creada correctamente");
         } catch (error: any) {
             toast.error('Algo salió mal!');
             setIsLoading(false);
-            console.log(error);
         }
     }
 

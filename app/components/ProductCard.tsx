@@ -1,9 +1,7 @@
 'use client'
 
 import Image from "next/image";
-import AvailableInput from "./Inputs/AvailableInput";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
     name: string;
@@ -12,28 +10,24 @@ interface ProductCardProps {
     image: string;
     availableProp: boolean;
     category: string;
+    id: string;
 }
 
-const ProductCard = ({ name, description, price, image, availableProp, category }: ProductCardProps) => {
-    const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<FieldValues>({
-        defaultValues: {
-          available: true,
-        }
-      });
+const ProductCard = ({ name, description, price, image, availableProp, category, id }: ProductCardProps) => {
+    const router = useRouter();
 
-    
     return (
-    <div className="flex flex-row justify-between w-full bg-slate-300 rounded-xl px-3 py-2 items-center">
+    <div className="flex flex-col md:flex-row justify-between w-full bg-slate-300 rounded-xl p-6 items-center">
         <Image 
             src={image}
             alt="Picture of the product"
-            width={100}
-            height={100}
+            width={120}
+            height={120}
             className="rounded-xl"
             style={{objectFit: 'cover'}}
         />
-        <div className="flex flex-col gap-2 text-left">
-            <h3>
+        <div className="flex flex-col gap-2 text-center md:text-left">
+            <h3 className="text-2xl font-bold mt-2 md:mt-0">
                 {name}
             </h3>
             <p>
@@ -43,9 +37,6 @@ const ProductCard = ({ name, description, price, image, availableProp, category 
                 Precio: $ {price}
             </p>
         </div>
-        <p>
-            {category}
-        </p>
         <div className="flex flex-row items-center gap-3">
             {
                 availableProp ? (
@@ -58,10 +49,12 @@ const ProductCard = ({ name, description, price, image, availableProp, category 
                     </p>
                 )
             }
-            <AvailableInput 
-                available={availableProp}
-                onClick={() => console.log('click')}
-            />
+            <button
+                className="bg-slate-500 text-white rounded-xl px-4 py-2"
+                onClick={() => router.push(`/editar/${id}`)}
+            >
+                Editar
+            </button>
         </div>
     </div>
   )

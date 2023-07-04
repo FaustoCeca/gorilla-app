@@ -31,8 +31,6 @@ const AdminLoginModal = () => {
                 redirect: false,
             });
 
-            console.log(login);
-
             if (login?.ok) {
                 setIsLoading(false);
                 toast.success('Bienvenido');

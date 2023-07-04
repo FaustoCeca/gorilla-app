@@ -48,9 +48,9 @@ const ProductModal = () => {
     });
   }
 
-  const handleBack = () => {
-    setStep((step) => step - 1);
-  }
+    const handleBack = () => {
+        setStep((step) => step - 1);
+    }
 
     const handleNext = () => {
         setStep((step) => step + 1);
@@ -102,10 +102,10 @@ const ProductModal = () => {
                 {categories.map((item) => (
                 <div className="col-span-1" key={item.label}>
                     <CategoryInput 
-                    onClick={(category) => setCustomValue('category', category)}
-                    label={item.label}
-                    icon={item.icon}
-                    selected={category === item.label}
+                        onClick={(category) => setCustomValue('category', category)}
+                        label={item.label}
+                        icon={item.icon}
+                        selected={category === item.label}
                     />
                 </div>
                 ))}

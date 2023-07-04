@@ -5,13 +5,12 @@ interface AvailableInputProps {
 }
 
 const AvailableInput = ({ available, onClick }: AvailableInputProps) => {
-
-
+    
   return (
     <input 
         type="checkbox" 
         defaultChecked={available} 
-        onClick={ onClick } 
+        onClick={onClick} 
         className="w-5 h-5 cursor-pointer"
     />
     )

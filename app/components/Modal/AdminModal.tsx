@@ -30,14 +30,11 @@ const AdminModalRegister = () => {
             registerModal.onClose();
             setIsLoading(false);
 
-            console.log(response);
-
             toast.success("Successfully registered!");
         }
         catch (error) {
             toast.error('Something went wrong!');
             setIsLoading(false);
-            console.log(error);
         }
     }
 

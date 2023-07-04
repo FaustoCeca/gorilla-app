@@ -6,3 +6,5 @@ type SafeAdmin = Omit<Admin,
         updatedAt: string;
         emailVerified: string | null;
     }>
+
+    
