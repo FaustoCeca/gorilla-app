@@ -14,7 +14,7 @@ const BranchPage = async ({ params }: { params:IParams}) => {
 
   const branch = await getBranchById(params);
   const products = await getProducts();
-  const currentUser = getCurrentUser();
+  const currentUser = await getCurrentUser();
 
   return (
     <>
@@ -35,6 +35,7 @@ const BranchPage = async ({ params }: { params:IParams}) => {
                       image={product.image}
                       availableProp={product.available}
                       category={product.category}
+                      showEditButton={currentUser ? true : false}
                     />
                 )
                 )

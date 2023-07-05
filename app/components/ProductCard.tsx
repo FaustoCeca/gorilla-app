@@ -19,7 +19,7 @@ const ProductCard = ({ name, description, price, image, availableProp, category,
     const router = useRouter();
 
     return (
-    <div className="flex flex-col md:flex-row justify-between w-full bg-slate-300 rounded-xl p-6 items-center">
+    <div className="flex flex-col justify-between bg-slate-300 rounded-xl p-6 items-center w-full">
         <Image 
             src={image}
             alt="Picture of the product"
@@ -28,7 +28,7 @@ const ProductCard = ({ name, description, price, image, availableProp, category,
             className="rounded-xl"
             style={{objectFit: 'cover'}}
         />
-        <div className="flex flex-col gap-2 text-center md:text-left">
+        <div className="flex flex-col gap-2 text-center my-3">
             <h3 className="text-2xl font-bold mt-2 md:mt-0">
                 {name}
             </h3>
