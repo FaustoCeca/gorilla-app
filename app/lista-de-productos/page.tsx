@@ -29,8 +29,7 @@ export default async function ListaDeProductosPage () {
                             currentUser ? true : false
                         }
                     />
-                )
-                )
+                ))
             }
         </div>
         <CategoryTitle title='Fritos' />
@@ -52,8 +51,7 @@ export default async function ListaDeProductosPage () {
                             currentUser ? true : false
                         }
                     />
-                )
-                )
+                ))
             }
         </div>
         <CategoryTitle title='Bebidas' />
@@ -75,8 +73,7 @@ export default async function ListaDeProductosPage () {
                             currentUser ? true : false
                         }
                     />
-                )
-                )
+                ))
             }
         </div>
     </div>

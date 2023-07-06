@@ -63,6 +63,18 @@ const UpdateForm = ({ id, name, description, available, image, price, categoryPr
         }
     }
 
+    const onDelete =async () => {
+        try {
+            const response = await axios.delete(`/api/products/${id}`);
+
+            toast.success('Producto eliminado correctamente');
+            router.push('/lista-de-productos');
+            router.refresh();
+        } catch (error: any) {
+            toast.error('Algo salió mal!');
+        }
+    };
+
     return (
         <form
             className="flex flex-col gap-4"
@@ -143,12 +155,23 @@ const UpdateForm = ({ id, name, description, available, image, price, categoryPr
                             <option value="false">No disponible</option>
                         </select>
                     </div>
-                    <button
-                        type="submit"
-                        className="w-full p-2 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                    <div
+                        className="flex flex-col md:flex-row gap-4 mt-3"
                     >
-                        Actualizar
-                    </button>
+                        <button
+                            type="button"
+                            className="w-full p-2 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                            onClick={onDelete}
+                        >
+                            Eliminar
+                        </button>
+                        <button
+                            type="submit"
+                            className="w-full p-2 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                        >
+                            Actualizar
+                        </button>
+                    </div>
                 </div>
             </div>
         </form>

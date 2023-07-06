@@ -10,7 +10,6 @@ export async function PUT( req : NextRequest,  { params }: { params:IParams } ) 
     const priceNumber = Number(body.price);
     const availableBoolean = Boolean(body.available);
 
-
     const updatedProduct = await prisma.product.update({
         where: {
             id: params.id,
@@ -27,4 +26,14 @@ export async function PUT( req : NextRequest,  { params }: { params:IParams } ) 
 
 
     return NextResponse.json(updatedProduct);
+}
+
+export async function DELETE( req : NextRequest,  { params }: { params:IParams } ) {
+    const deletedProduct = await prisma.product.delete({
+        where: {
+            id: params.id,
+        },
+    });
+
+    return NextResponse.json(deletedProduct);
 }

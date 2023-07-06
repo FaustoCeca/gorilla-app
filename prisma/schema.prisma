@@ -33,6 +33,7 @@ model Order {
   phone     String
   total     Float
   products  Product[]
+  clarifications String?
   branchId  String?   @db.ObjectId
 
   branch Branch? @relation(fields: [branchId], references: [id], onDelete: Cascade)
@@ -44,12 +45,12 @@ model Product {
   updatedAt   DateTime @updatedAt
   name        String
   description String
+  image       String
   price       Int
-  quantity    Int?
   category    String
   available   Boolean
+  quantity    Int?
   featured    Boolean?
-  image       String
   orderId     String?  @db.ObjectId
   branchId    String?  @db.ObjectId
 

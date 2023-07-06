@@ -42,7 +42,7 @@ const AdminMenu = ({ currentUser }: AdminMenuProps) => {
                 </div>
             </div>
             {isOpen && (
-                <div className="z-50 absolute rounded-xl shadow-md w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
+                <div className="z-50 absolute rounded-xl shadow-md w-[40vw] md:w-10/12 bg-white overflow-hidden right-0 top-12 text-sm">
                     <div className="flex flex-col gap-2 cursor-pointer">
                         {
                             currentUser && (
