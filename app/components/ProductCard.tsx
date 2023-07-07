@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { getCurrentUser } from "../helpers/getCurrentUser";
+import useCart from "../hooks/useCart";
 
 interface ProductCardProps {
     name: string;
@@ -17,6 +17,7 @@ interface ProductCardProps {
 
 const ProductCard = ({ name, description, price, image, availableProp, category, id, showEditButton }: ProductCardProps) => {
     const router = useRouter();
+    const { addToCart } = useCart(); 
 
     return (
     <div className="flex flex-col justify-between bg-slate-300 rounded-xl p-6 items-center w-full">
@@ -39,29 +40,41 @@ const ProductCard = ({ name, description, price, image, availableProp, category,
                 Precio: $ {price}
             </p>
         </div>
-        <div className="flex flex-row items-center gap-3">
-            {
-                availableProp ? (
-                    <p className="text-green-500">
-                        Disponible
-                    </p>
-                ) : (
-                    <p className="text-red-500">
-                        No disponible
-                    </p>
-                )
-            }
-            {
-                showEditButton && (
-                    <button
+        {
+            showEditButton && (
+            <div className="flex flex-row items-center gap-3">
+                {
+                    availableProp ? (
+                        <p className="text-green-500">
+                            Disponible
+                        </p>
+                    ) : (
+                        <p className="text-red-500">
+                            No disponible
+                        </p>
+                    )
+                }
+                <button
                     className="bg-slate-500 text-white rounded-xl px-4 py-2"
                     onClick={() => router.push(`/editar/${id}`)}
-                    >
-                        Editar
-                    </button>
-                )
-            }
-        </div>
+                >
+                    Editar
+                </button>
+            </div>
+        )}
+        <button
+            className="bg-slate-500 text-white rounded-xl px-4 py-2 mt-4"
+            onClick={() => addToCart({
+                id,
+                name,
+                description,
+                price,
+                image,
+                category
+            })}
+        >
+            Agregar al carrito
+        </button>
     </div>
   )
 }

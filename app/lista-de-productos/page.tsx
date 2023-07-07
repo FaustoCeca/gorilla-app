@@ -2,10 +2,12 @@ import { getProducts } from '../helpers/getProducts';
 import ProductCard from '../components/ProductCard';
 import CategoryTitle from '../components/CategoryTitle';
 import { getCurrentUser } from '../helpers/getCurrentUser';
+import useCart from '../hooks/useCart';
 
 export default async function ListaDeProductosPage () {
     const products = await getProducts();
     const currentUser = await getCurrentUser();
+    const cart = useCart();
 
     return (
     <div className='flex flex-col items-center justify-start px-20'>

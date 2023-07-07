@@ -1,9 +1,10 @@
 import { create } from "zustand";
+import { CartItems } from "../types";
 
 interface CartStore {
-    cart: any[];
-    addToCart: (item: any) => void;
-    removeFromCart: (item: any) => void;
+    cart: CartItems[];
+    addToCart: (item: CartItems) => void;
+    removeFromCart: (item: CartItems) => void;
     clearCart: () => void;
 }
 

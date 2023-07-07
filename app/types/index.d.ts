@@ -7,4 +7,9 @@ type SafeAdmin = Omit<Admin,
         emailVerified: string | null;
     }>
 
-    
+type CartItems = {
+    id: string;
+    name: string;
+    price: number;
+    quantity: number | undefined;
+}

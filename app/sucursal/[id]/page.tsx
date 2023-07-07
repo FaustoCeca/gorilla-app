@@ -1,10 +1,12 @@
 import BranchInfo from "@/app/components/BranchInfo";
+import OrderCart from "@/app/components/Cart/OrderCart";
 import CategoryTitle from "@/app/components/CategoryTitle";
 import InfoModal from "@/app/components/Modal/InfoModal";
 import ProductCard from "@/app/components/ProductCard";
 import getBranchById from "@/app/helpers/getBranchById";
 import { getCurrentUser } from "@/app/helpers/getCurrentUser";
 import { getProducts } from "@/app/helpers/getProducts";
+import useCart from "@/app/hooks/useCart";
 
 interface IParams {
   id: string;
@@ -21,7 +23,6 @@ const BranchPage = async ({ params }: { params:IParams}) => {
       <main className="template-columnas px-8 md:px-28 mt-4">
           <section>
             <BranchInfo />
-
             <CategoryTitle title='Burguers' />
             <hr />
             {
@@ -42,7 +43,7 @@ const BranchPage = async ({ params }: { params:IParams}) => {
             }
           </section>
           <aside>
-            Formulario de pago
+            <OrderCart />
           </aside>
       </main>
       <InfoModal 
