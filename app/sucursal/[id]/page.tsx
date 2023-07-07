@@ -2,6 +2,7 @@ import BranchInfo from "@/app/components/BranchInfo";
 import OrderCart from "@/app/components/Cart/OrderCart";
 import CategoryTitle from "@/app/components/CategoryTitle";
 import InfoModal from "@/app/components/Modal/InfoModal";
+import OrderModal from "@/app/components/Modal/OrderModal";
 import ProductCard from "@/app/components/ProductCard";
 import getBranchById from "@/app/helpers/getBranchById";
 import { getCurrentUser } from "@/app/helpers/getCurrentUser";
@@ -51,6 +52,7 @@ const BranchPage = async ({ params }: { params:IParams}) => {
         address={branch?.address}
         phone={branch?.phone}
       />
+      <OrderModal />
     </>
   )
 }

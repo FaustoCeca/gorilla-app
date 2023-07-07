@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import useCart from "../hooks/useCart";
+import Button from "./Buttons/Button";
 
 interface ProductCardProps {
     name: string;
@@ -63,14 +64,12 @@ const ProductCard = ({ name, description, price, image, availableProp, category,
             </div>
         )}
         <button
-            className="bg-slate-500 text-white rounded-xl px-4 py-2 mt-4"
+            className="bg-red-500 text-white rounded-xl px-4 py-2 mt-4"
             onClick={() => addToCart({
                 id,
                 name,
-                description,
                 price,
-                image,
-                category
+                quantity: 0
             })}
         >
             Agregar al carrito

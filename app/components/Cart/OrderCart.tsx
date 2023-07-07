@@ -3,9 +3,13 @@
 import { CartItems } from "@/app/types";
 import useCart from "../../hooks/useCart";
 import ItemsCart from "./ItemsCart";
+import Button from "../Buttons/Button";
+import useOrderModal from "@/app/hooks/useOrderModal";
 
 const OrderCart = () => {
-  const { addToCart, cart, clearCart, removeFromCart } = useCart();
+  const { cart, clearCart, removeFromCart } = useCart();
+  const { onOpen } = useOrderModal();
+
 
   const calcQuantity = (id: string): number | undefined => {
     let quantity = 0;
@@ -43,6 +47,21 @@ const OrderCart = () => {
             <p className="text-md font-bold">
               $ {cart.reduce((acc: number, item: CartItems) => acc + item.price, 0)}
             </p>
+          </div>
+        </div>
+        <div className="mt-5">
+          <Button 
+            label="Vaciar"
+            onClick={() => clearCart()}
+            disabled={cart.length === 0}
+            outline
+          />
+          <div className="mt-2">
+            <Button 
+              label="Ordenar"
+              onClick={onOpen}
+              disabled={cart.length === 0}
+            />
           </div>
         </div>
     </div>
