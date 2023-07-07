@@ -9,6 +9,8 @@ import { toast } from "react-hot-toast";
 import Heading from "../Heading";
 import Input from "../Inputs/Input";
 import useCart from "@/app/hooks/useCart";
+import ItemsCart from "../Cart/ItemsCart";
+import { CartItems } from "@/app/types";
 
 enum Steps {
     Delivery = 1,
@@ -20,7 +22,7 @@ const OrderModal = () => {
     const { onClose, isOpen } = useOrderModal();
     const [isLoading, setIsLoading] = useState(false);
     const [step, setStep] = useState(Steps.Delivery);
-    const { cart, clearCart } = useCart();
+    const { cart } = useCart();
 
     const { register, handleSubmit, setValue, watch, formState: { errors }, reset } = useForm<FieldValues>({
         defaultValues: {
@@ -38,6 +40,9 @@ const OrderModal = () => {
     });
 
     const deliveryMethod = watch('deliveryMethod');
+    const clarifications = watch('clarifications');
+
+    console.log(clarifications);
 
     const setCustomValue = (id: string, value: any) => {
         setValue(id, value, {
@@ -45,6 +50,18 @@ const OrderModal = () => {
             shouldDirty: true,
             shouldTouch: true,
         });
+    }
+
+    const calcQuantity = (id: string): number | undefined => {
+        let quantity = 0;
+        
+        cart.forEach((item: CartItems) => {
+          if (item.id === id) {
+            quantity += 1;
+          }
+        });
+    
+        return quantity;
     }
 
     const HandleBack = () => {
@@ -134,6 +151,40 @@ const OrderModal = () => {
             </div>
         </div>
     )
+
+    if (step === Steps.Info) {
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading title="¿Algo más que nos quieras decir?" subtitle="Asegurate de que sean correctos" />
+                <div className="flex flex-col gap-4">
+                    {
+                        cart.map((item: CartItems, index: number) => (
+                            <ItemsCart
+                                key={index}
+                                id={item.id}
+                                name={item.name}
+                                price={item.price}
+                                quantity={calcQuantity(item.id)}
+                            />
+                        )
+                    )}
+                    <hr />
+                    <h3
+                        className="text-2xl font-bold"
+                    >
+                        Total: ${cart.reduce((acc: number, item: CartItems) => acc + item.price, 0)}
+                    </h3>
+                    <textarea 
+                        id="carifications" 
+                        className="border border-gray-300 rounded-md p-2"
+                        {...register('clarifications')}
+                            placeholder="Aclaraciones"
+                    >
+                    </textarea>
+                </div>
+            </div>
+        )
+    }
 
     
 

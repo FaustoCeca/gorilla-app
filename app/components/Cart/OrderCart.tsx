@@ -10,7 +10,6 @@ const OrderCart = () => {
   const { cart, clearCart, removeFromCart } = useCart();
   const { onOpen } = useOrderModal();
 
-
   const calcQuantity = (id: string): number | undefined => {
     let quantity = 0;
     
