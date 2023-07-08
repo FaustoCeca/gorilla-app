@@ -5,10 +5,13 @@ import useCart from "../../hooks/useCart";
 import ItemsCart from "./ItemsCart";
 import Button from "../Buttons/Button";
 import useOrderModal from "@/app/hooks/useOrderModal";
+import axios from "axios";
+
 
 const OrderCart = () => {
   const { cart, clearCart, removeFromCart } = useCart();
   const { onOpen } = useOrderModal();
+
 
   const calcQuantity = (id: string): number | undefined => {
     let quantity = 0;

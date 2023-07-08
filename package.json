@@ -20,6 +20,7 @@
     "csstype": "^3.1.2",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
+    "mercadopago": "^1.5.16",
     "next": "13.4.5",
     "next-auth": "^4.22.1",
     "next-cloudinary": "^4.13.0",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/mercadopago": "^1.5.8",
     "prisma": "^4.16.0"
   }
 }

@@ -29,8 +29,10 @@ model Order {
   updatedAt DateTime  @updatedAt
   status    String
   client    String
-  address   String
+  address   String?
   phone     String
+  paymentMethod String
+  deliveryMethod String
   total     Float
   products  Product[]
   clarifications String?

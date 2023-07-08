@@ -7,7 +7,6 @@ import ProductCard from "@/app/components/ProductCard";
 import getBranchById from "@/app/helpers/getBranchById";
 import { getCurrentUser } from "@/app/helpers/getCurrentUser";
 import { getProducts } from "@/app/helpers/getProducts";
-import useCart from "@/app/hooks/useCart";
 
 interface IParams {
   id: string;
@@ -52,7 +51,9 @@ const BranchPage = async ({ params }: { params:IParams}) => {
         address={branch?.address}
         phone={branch?.phone}
       />
-      <OrderModal />
+      <OrderModal 
+        branchName={branch?.name}
+      />
     </>
   )
 }

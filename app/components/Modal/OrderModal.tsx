@@ -11,18 +11,26 @@ import Input from "../Inputs/Input";
 import useCart from "@/app/hooks/useCart";
 import ItemsCart from "../Cart/ItemsCart";
 import { CartItems } from "@/app/types";
+import { Branch } from "@prisma/client";
 
 enum Steps {
     Delivery = 1,
     Info = 2,
     Payment = 3,
+    // Thanks = 4,
 }
 
-const OrderModal = () => {
+interface OrderModalProps {
+    branchName: string | undefined;
+}
+
+const OrderModal = ({ branchName }: OrderModalProps) => {
     const { onClose, isOpen } = useOrderModal();
     const [isLoading, setIsLoading] = useState(false);
     const [step, setStep] = useState(Steps.Delivery);
     const { cart } = useCart();
+
+    console.log(cart);
 
     const { register, handleSubmit, setValue, watch, formState: { errors }, reset } = useForm<FieldValues>({
         defaultValues: {
@@ -32,17 +40,15 @@ const OrderModal = () => {
             paymentMethod: '',
             deliveryMethod: '',
             status: 'pending',
-            schedule: '',
             clarifications: '',
+            branch: branchName,
             products: [],
-            total: 0,
+            total: '',
+            cash: '',
         }
     });
 
     const deliveryMethod = watch('deliveryMethod');
-    const clarifications = watch('clarifications');
-
-    console.log(clarifications);
 
     const setCustomValue = (id: string, value: any) => {
         setValue(id, value, {
@@ -62,6 +68,12 @@ const OrderModal = () => {
         });
     
         return quantity;
+    }
+
+    const mercadoPagoPayment = async () => {
+        const response = await axios.post('/api/mercadopago', {
+            products: cart,
+        });
     }
 
     const HandleBack = () => {
@@ -85,6 +97,9 @@ const OrderModal = () => {
 
             onClose();
             toast.success('Pedido realizado con éxito');
+            reset();
+            // setStep(Steps.Thanks);
+            setIsLoading(false);
         } catch (error: any) {
             toast.error('Error al realizar el pedido, intentalo de nuevo');            
         }
@@ -174,11 +189,16 @@ const OrderModal = () => {
                     >
                         Total: ${cart.reduce((acc: number, item: CartItems) => acc + item.price, 0)}
                     </h3>
+                    <label 
+                        htmlFor="clarifications"
+                        className="text-lg font-semibold"
+                    >
+                        Aclaraciones
+                    </label>
                     <textarea 
                         id="carifications" 
                         className="border border-gray-300 rounded-md p-2"
                         {...register('clarifications')}
-                            placeholder="Aclaraciones"
                     >
                     </textarea>
                 </div>
@@ -186,7 +206,68 @@ const OrderModal = () => {
         )
     }
 
-    
+    if (step === Steps.Payment) {
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading title="¿Cómo vas a pagar?" subtitle="Selecciona un metodo de pago" />
+                <div className="flex flex-col gap-4">
+                    <select
+                        className="border border-gray-300 rounded-md p-2"
+                        {...register('paymentMethod', { required: true })}
+                    >
+                        <option value="">
+                            Selecciona un método de pago
+                        </option>
+                        <option value="cash">
+                            Efectivo
+                        </option>
+                        <option value="online">
+                            Online
+                        </option>
+                    </select>
+                    {
+                        watch('paymentMethod') === 'cash' && (
+                            <Input
+                                label="¿Con cuanto vas a pagar?"
+                                id="cash"
+                                register={register}
+                                required
+                                errors={errors}
+                                formatPrice
+                            />
+                        )
+                    }
+                    {
+                        watch('paymentMethod') === 'online' && (
+                            <button
+                                className="bg-blue-500 text-white rounded-md p-2"
+                                onClick={
+                                    () => {
+                                        mercadoPagoPayment();
+                                    }
+                                }
+                            >
+                                Pagar con Mercado Pago
+                            </button>
+                        )
+                    }
+                </div>
+            </div>
+        )
+    }
+
+    // if (step === Steps.Thanks) {
+    //     bodyContent = (
+    //         <div className="flex flex-col gap-8">
+    //             <Heading title="¡Gracias por tu pedido!" subtitle="En breve nos pondremos en contacto contigo" />
+    //             <div className="flex flex-col gap-4">
+    //                 <div className="flex flex-col gap-4">
+    //                     <h3 className="text-2xl font-bold">Tu pedido</h3>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     )
+    // }
 
     return (
         <Modal
