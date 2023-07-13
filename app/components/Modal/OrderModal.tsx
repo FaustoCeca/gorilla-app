@@ -11,7 +11,8 @@ import Input from "../Inputs/Input";
 import useCart from "@/app/hooks/useCart";
 import ItemsCart from "../Cart/ItemsCart";
 import { CartItems } from "@/app/types";
-import { Branch } from "@prisma/client";
+import MercadoPagoButton from "../Buttons/MercadoPagoButton";
+import { useRouter } from "next/navigation";
 
 enum Steps {
     Delivery = 1,
@@ -29,8 +30,8 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const [step, setStep] = useState(Steps.Delivery);
     const { cart } = useCart();
-
-    console.log(cart);
+    const totalFn = cart.reduce((acc: number, item: CartItems) => acc + item.price, 0);
+    const router = useRouter();
 
     const { register, handleSubmit, setValue, watch, formState: { errors }, reset } = useForm<FieldValues>({
         defaultValues: {
@@ -50,6 +51,18 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
 
     const deliveryMethod = watch('deliveryMethod');
 
+    const setProductsWithCartValues = () => {
+        const productsWithCartValues = cart.map((item: CartItems) => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: calcQuantity(item.id),
+        }));
+
+        setCustomValue('products', productsWithCartValues);
+        setCustomValue('total', totalFn);
+    }
+
     const setCustomValue = (id: string, value: any) => {
         setValue(id, value, {
             shouldValidate: true,
@@ -58,7 +71,7 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
         });
     }
 
-    const calcQuantity = (id: string): number | undefined => {
+    const calcQuantity = (id: string): number => {
         let quantity = 0;
         
         cart.forEach((item: CartItems) => {
@@ -70,11 +83,11 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
         return quantity;
     }
 
-    const mercadoPagoPayment = async () => {
-        const response = await axios.post('/api/mercadopago', {
-            products: cart,
-        });
-    }
+    // const mercadoPagoPayment = async () => {
+    //     const response = await axios.post('/api/mercadopago', {
+    //         products: cart,
+    //     });
+    // }
 
     const HandleBack = () => {
         setStep((step) => step - 1);
@@ -82,6 +95,10 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
 
     const HandleNext = () => {
         setStep((step) => step + 1);
+
+        if (step === Steps.Info) {
+            setProductsWithCartValues();
+        }
     }
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -91,17 +108,24 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
         }
 
         setIsLoading(true);
-
+        
         try {
             const response = await axios.post('/api/orders', data);
 
+            console.log(response);
+
             onClose();
             toast.success('Pedido realizado con éxito');
+            router.push('/');
             reset();
-            // setStep(Steps.Thanks);
+            setStep(Steps.Delivery);
             setIsLoading(false);
         } catch (error: any) {
-            toast.error('Error al realizar el pedido, intentalo de nuevo');            
+            toast.error('Error al realizar el pedido, intentalo de nuevo'); 
+            console.log(error);
+            onClose();
+            reset();
+            setStep(Steps.Delivery);
         }
     }
 
@@ -187,7 +211,7 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
                     <h3
                         className="text-2xl font-bold"
                     >
-                        Total: ${cart.reduce((acc: number, item: CartItems) => acc + item.price, 0)}
+                        Total: ${totalFn}
                     </h3>
                     <label 
                         htmlFor="clarifications"
@@ -237,20 +261,13 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
                             />
                         )
                     }
-                    {
+                    {/* {
                         watch('paymentMethod') === 'online' && (
-                            <button
-                                className="bg-blue-500 text-white rounded-md p-2"
-                                onClick={
-                                    () => {
-                                        mercadoPagoPayment();
-                                    }
-                                }
-                            >
-                                Pagar con Mercado Pago
-                            </button>
+                            <MercadoPagoButton
+                                products={cart}
+                            />
                         )
-                    }
+                    } */}
                 </div>
             </div>
         )

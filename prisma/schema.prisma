@@ -19,7 +19,7 @@ model Branch {
   phone     String
   schedule  String
 
-  orders   Order[]
+  // orders   Order[]
   products Product[]
 }
 
@@ -30,15 +30,16 @@ model Order {
   status    String
   client    String
   address   String?
-  phone     String
+  phone     Int
   paymentMethod String
   deliveryMethod String
   total     Float
-  products  Product[]
+  products  Json[]
   clarifications String?
-  branchId  String?   @db.ObjectId
+  branch String?
+  // branchId  String?   @db.ObjectId
 
-  branch Branch? @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  // branch Branch? @relation(fields: [branchId], references: [id], onDelete: Cascade)
 }
 
 model Product {
@@ -57,7 +58,7 @@ model Product {
   branchId    String?  @db.ObjectId
 
   branch Branch? @relation(fields: [branchId], references: [id])
-  order  Order?  @relation(fields: [orderId], references: [id])
+  // order  Order?  @relation(fields: [orderId], references: [id])
 }
 
 model Admin {

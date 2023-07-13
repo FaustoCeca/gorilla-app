@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     });
 
     productSchema.parse(body);
-
+    
     const priceNumber = Number(price);
 
     const product = await prisma.product.create({

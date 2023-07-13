@@ -11,3 +11,20 @@
         grid-template-columns: 1fr;
     }
 }
+
+.spinner {
+    border: 3px solid #e2e2e2;
+    border-radius: 50%;
+    border-left-color: white;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

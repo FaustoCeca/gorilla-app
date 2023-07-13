@@ -50,7 +50,7 @@ const AdminMenu = ({ currentUser }: AdminMenuProps) => {
                                     <MenuItem label="Agregar nueva sucursal" onClick={handleBranch} />
                                     <MenuItem label="Agregar nuevo producto" onClick={handleProduct} />
                                     <MenuItem label="Lista de productos" onClick={ () => router.push('/lista-de-productos') } />
-                                    <MenuItem label="Lista de ordenes" onClick={ () => {}} />
+                                    <MenuItem label="Lista de ordenes" onClick={ () => router.push('/lista-de-ordenes')} />
                                     <MenuItem label="Lista de sucursales" onClick={ () => {}} />
                                     <hr />
                                     <MenuItem label="Logout" onClick={() => signOut()} />
