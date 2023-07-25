@@ -13,3 +13,19 @@ type CartItems = {
     price: number;
     quantity: number | undefined;
 }
+
+type Order = {
+    id: string;
+    createdAt: string;
+    updatedAt: string;
+    status: string;
+    client: string;
+    address?: string;
+    phone: number;
+    paymentMethod: string;
+    deliveryMethod: string;
+    total: number;
+    products: any;
+    clarafications?: string;
+    branch: string;  
+}

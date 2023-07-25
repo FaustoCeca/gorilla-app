@@ -112,8 +112,6 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
         try {
             const response = await axios.post('/api/orders', data);
 
-            console.log(response);
-
             onClose();
             toast.success('Pedido realizado con éxito');
             router.push('/');
