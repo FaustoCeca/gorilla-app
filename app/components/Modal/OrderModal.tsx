@@ -40,7 +40,7 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
             phone: '',
             paymentMethod: '',
             deliveryMethod: '',
-            status: 'pending',
+            status: 'Pendiente',
             clarifications: '',
             branch: branchName,
             products: [],
@@ -107,6 +107,13 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
             return;
         }
 
+        const numberCash = Number(watch('cash'));
+
+        if (numberCash < totalFn) {
+            toast.error('El monto ingresado es menor al total');
+            return;
+        }
+
         setIsLoading(true);
         
         try {
@@ -160,6 +167,7 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
                     register={register}
                     required
                     errors={errors}
+                    type="number"
                 />
                 <select
                     className="border border-gray-300 rounded-md p-2"
@@ -256,7 +264,10 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
                                 required
                                 errors={errors}
                                 formatPrice
+                                type="number"
                             />
+
+
                         )
                     }
                     {/* {

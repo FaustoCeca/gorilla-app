@@ -35,6 +35,7 @@ model Order {
   deliveryMethod String
   total     Float
   products  Json[]
+  cashAmount Float?
   clarifications String?
   branch String?
   // branchId  String?   @db.ObjectId

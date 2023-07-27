@@ -22,3 +22,13 @@ export async function PUT( req : NextRequest, { params }: { params:IParams } ) {
 
     return NextResponse.json(updatedOrder);
 }
+
+export async function DELETE( req : NextRequest, { params }: { params:IParams } ) {
+    const deletedOrder = await prisma.order.delete({
+        where: {
+            id: params.id,
+        },
+    });
+
+    return NextResponse.json(deletedOrder);
+}

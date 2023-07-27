@@ -1,6 +1,7 @@
 'use client';
 
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -22,6 +23,7 @@ interface OrderBodyProps {
     }>
     clarifications?: string | null,
     branch: string | null
+    cashAmount?: number | null
 }
 
 const OrderBody = ({
@@ -36,28 +38,49 @@ const OrderBody = ({
     deliveryMethod,
     products,
     clarifications,
-    branch
+    branch,
+    cashAmount
 }: OrderBodyProps) => {
     const [showDetails, setShowDetails] = useState<boolean>(false);
+    const router = useRouter();
 
-    const changeStatus = async (status: string) => {
+    const generateOrderNumber = (id: string): string => {
+        const indexInit = Math.floor((id.length - 3) / 3);
+        return id.substring(indexInit, 3);
+    }
+
+
+
+    const handleChangeStatus = async (status: string) => {
         try {
             const response = await axios.put(`/api/orders/${id}`, { status }); 
 
+            router.refresh();
             toast.success('Orden actualizada!');
         } catch (error) {
             console.log(error);
         }
     }
+
+    const handleDeleteOrder = async (id: string) => {
+        try {
+            const response = await axios.delete(`/api/orders/${id}`);
+            
+            router.refresh();
+            toast.success('Orden eliminada!');
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
   return (
     <>
         <tr 
             className='border-2 w-full border-gray-200 hover:bg-gray-100 cursor-pointer'
             onClick={() => setShowDetails(!showDetails)}
-            onDoubleClick={() => changeStatus('Completado')}
         >
             <td>
-                {id}
+                {generateOrderNumber(id)}
             </td>
             <td>
                 {client}
@@ -105,13 +128,6 @@ const OrderBody = ({
                         </div>
                     ))}
                     <hr />
-                    {
-                        deliveryMethod === 'delivery' && (
-                            <p className="py-2">
-                               Entregar en: {address}
-                            </p>
-                        )
-                    }
                     <hr />
                     {
                         clarifications && (
@@ -120,14 +136,37 @@ const OrderBody = ({
                             </p>
                         )
                     }
-                    {/* TODO */}
-                    {/* {
+                    {
                         paymentMethod === 'cash' && (
                             <p className="py-2">
-                                Pago en efectivo
+                                Paga con: {cashAmount}
                             </p>
                         )
-                    } */}
+                    }
+                    <hr />
+                    {
+                        status === 'Completado' ? (
+                            <button
+                                className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded my-2'
+                                onClick={() => handleChangeStatus('Pendiente')}
+                            >
+                                Pasar a pendiente
+                            </button>
+                        ) : (
+                            <button
+                                className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded my-2'
+                                onClick={() => handleChangeStatus('Completado')}
+                            >
+                                Pasar a completado
+                            </button>
+                        )
+                    }
+                    <button
+                        className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded my-2 block'
+                        onClick={() => handleDeleteOrder(id)}
+                    >
+                        Eliminar orden
+                    </button>
                 </div>
             )
         }

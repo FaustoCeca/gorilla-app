@@ -11,6 +11,7 @@ interface InputProps {
     required?: boolean
     register: UseFormRegister<FieldValues>
     errors: FieldErrors
+    total?: number
 }
 
 const Input = ({ 
@@ -21,7 +22,7 @@ const Input = ({
     formatPrice,
     required,
     register,
-    errors
+    errors,
  }: InputProps) => {
   return (
     <div className="w-full relative">

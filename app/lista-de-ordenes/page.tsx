@@ -6,6 +6,8 @@ export default async function ListaDeOrdenesPage () {
     const orders = await getOrders();
     const currentUser = await getCurrentUser();
 
+    console.log(orders);
+
   return (
         <div className='px-32'>
             {
@@ -56,6 +58,7 @@ export default async function ListaDeOrdenesPage () {
                                             products={order.products}
                                             clarifications={order.clarifications}
                                             branch={order.branch}
+                                            cashAmount={order.cashAmount}
                                         />
                                     ))
                                 }
@@ -111,6 +114,7 @@ export default async function ListaDeOrdenesPage () {
                                         products={order.products}
                                         clarifications={order.clarifications}
                                         branch={order.branch}
+                                        cashAmount={order.cashAmount}
                                     />
                                 ))
                             }

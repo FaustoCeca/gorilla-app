@@ -4,8 +4,9 @@ import { z } from "zod";
 
 export async function POST(request: NextRequest) {
     const body = await request.json();
-    const { client, address, phone, paymentMethod, deliveryMethod, status, clarifications, products, total, branch } = body;
+    const { client, address, phone, paymentMethod, deliveryMethod, status, clarifications, products, total, branch, cash } = body;
     const phoneNumber = Number(phone);
+    const cashNumber = Number(cash);
 
     const orderSchema = z.object({
         client: z.string(),
@@ -36,7 +37,8 @@ export async function POST(request: NextRequest) {
         clarifications,
         products,
         total,
-        branch
+        branch,
+        cash: cashNumber,
     });
 
     const order = await prisma.order.create({
@@ -51,10 +53,10 @@ export async function POST(request: NextRequest) {
             products,
             paymentMethod,
             deliveryMethod,
+            cashAmount: cashNumber,
         }
     });
 
     console.log(order);
-
     return NextResponse.json(order);
 }
