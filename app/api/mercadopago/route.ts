@@ -7,40 +7,41 @@ mercadopago.configure({
     access_token: process.env.NEXT_ACCESS_TOKEN!,
 });
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-    if (req.method === "POST") {
-        const products: CartItems[] = req.body.products;
+// export async function POST ()
 
-        const URL = "https://localhost:3000";
+// const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+//     if (req.method === "POST") {
+//         const products: CartItems[] = req.body.products;
 
-        try {
-            const preference: CreatePreferencePayload = {
-                items: products.map((product: CartItems) => {
-                    return {
-                        title: product.name,
-                        unit_price: product.price,
-                        currency_id: "ARS",
-                        quantity: 1,
-                    }
-                }),
-                auto_return: "approved",
-                back_urls: {
-                    success: `${URL}/success`,
-                    failure: `${URL}/failure`,
-                },
-                notification_url: `${URL}/api/notify`,
-            }
+//         const URL = "https://localhost:3000";
 
-            const response = await mercadopago.preferences.create(preference);
+//         try {
+//             const preference: CreatePreferencePayload = {
+//                 items: products.map((product: CartItems) => {
+//                     return {
+//                         title: product.name,
+//                         unit_price: product.price,
+//                         currency_id: "ARS",
+//                         quantity: 1,
+//                     }
+//                 }),
+//                 auto_return: "approved",
+//                 back_urls: {
+//                     success: `${URL}/success`,
+//                     failure: `${URL}/failure`,
+//                 },
+//                 notification_url: `${URL}/api/notify`,
+//             }
 
-            res.status(200).send({ url: response.body.init_point });
+//             const response = await mercadopago.preferences.create(preference);
+
+//             res.status(200).send({ url: response.body.init_point });
             
-        } catch (error) {
+//         } catch (error) {
             
-        }
-    } else {
-        res.status(405).json({ message: "Method not allowed" });
-    }
-}
+//         }
+//     } else {
+//         res.status(405).json({ message: "Method not allowed" });
+//     }
+// }
 
-export default handler;

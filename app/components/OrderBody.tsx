@@ -128,18 +128,30 @@ const OrderBody = ({
                         </div>
                     ))}
                     <hr />
-                    <hr />
                     {
                         clarifications && (
-                            <p className="py-2">
+                            <>
+                                <p className="py-2">
                                 Aclaraciones: {clarifications}
-                            </p>
+                                </p>
+                                <hr />
+                            </>
                         )
                     }
                     {
                         paymentMethod === 'cash' && (
+                            <>
+                                <p className="py-2">
+                                    Paga con: {cashAmount}
+                                </p>
+                                <hr />
+                            </>
+                        )
+                    }
+                    {
+                        deliveryMethod === 'delivery' && (
                             <p className="py-2">
-                                Paga con: {cashAmount}
+                                Direccion: {address}
                             </p>
                         )
                     }

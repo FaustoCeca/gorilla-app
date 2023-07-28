@@ -16,7 +16,7 @@ const SidebarMenu = () => {
             <div className="flex flex-col h-full justify-between">
                 <div className="flex flex-col gap-2 md:gap-3 text-left">
                     <h3 className="font-semibold text-red-700">
-                    Gorilla app
+                        Gorila app
                     </h3>
                     <Link className="text-grey-700 hover:text-red-700" href="/">
                         Inicio

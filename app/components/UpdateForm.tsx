@@ -48,6 +48,10 @@ const UpdateForm = ({ id, name, description, available, image, price, categoryPr
         });
     }
 
+    const handleChangeAvailable = () => {
+        setCustomValue('available', !available);
+    };
+
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         setIsLoading(true);
 
@@ -143,17 +147,18 @@ const UpdateForm = ({ id, name, description, available, image, price, categoryPr
                         />
                     </div>
                     <div 
-                        className="flex flex-col gap-4 mt-3"
+                        className="flex items-center gap-4 mt-3"
                     >
                         <h2>
                             Disponibilidad actual: {available ? 'Disponible' : 'No disponible'}
                         </h2>
-                        <select
-                            className="w-full p-2 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
-                        >
-                            <option value="true">Disponible</option>
-                            <option value="false">No disponible</option>
-                        </select>
+                        <input 
+                            type="checkbox" 
+                            id="available"
+                            className="w-5 h-5"
+                            checked={available}
+                            onChange={handleChangeAvailable}
+                        />
                     </div>
                     <div
                         className="flex flex-col md:flex-row gap-4 mt-3"

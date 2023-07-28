@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
         description: z.string().min(3).max(500),
         imageSrc: z.string().min(3).max(500),
         category: z.string().min(3).max(50),
-        price: z.number().min(1),
+        price: z.coerce.number().min(1),
         available: z.boolean(),
     });
 

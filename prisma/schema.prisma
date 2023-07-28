@@ -55,11 +55,9 @@ model Product {
   available   Boolean
   quantity    Int?
   featured    Boolean?
-  orderId     String?  @db.ObjectId
   branchId    String?  @db.ObjectId
 
   branch Branch? @relation(fields: [branchId], references: [id])
-  // order  Order?  @relation(fields: [orderId], references: [id])
 }
 
 model Admin {

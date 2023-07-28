@@ -7,6 +7,10 @@ export default async function ListaDeProductosPage () {
     const products = await getProducts();
     const currentUser = await getCurrentUser();
 
+    const burguers = products.filter((product) => product.category === 'Burguers');
+    const fritos = products.filter((product) => product.category === 'Fritos');
+    const bebidas = products.filter((product) => product.category === 'Bebidas');
+
     return (
     <div className='flex flex-col items-center justify-start px-20'>
         {
@@ -18,7 +22,7 @@ export default async function ListaDeProductosPage () {
                 className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
             >
                 {
-                    products.filter((product) => product.category === 'Burguers').map((product) => (
+                    burguers.map((product) => (
                         <ProductCard 
                             key={product.id}
                             id={product.id}
@@ -40,7 +44,7 @@ export default async function ListaDeProductosPage () {
                 className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
             >
                 {
-                    products.filter((product) => product.category === 'Fritos').map((product) => (
+                    fritos.map((product) => (
                         <ProductCard 
                             key={product.id}
                             id={product.id}
@@ -62,7 +66,7 @@ export default async function ListaDeProductosPage () {
                 className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
             >
                 {
-                    products.filter((product) => product.category === 'Bebidas').map((product) => (
+                    bebidas.map((product) => (
                         <ProductCard 
                             key={product.id}
                             id={product.id}

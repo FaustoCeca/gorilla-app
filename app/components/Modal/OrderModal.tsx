@@ -84,10 +84,16 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
     }
 
     // const mercadoPagoPayment = async () => {
-    //     const response = await axios.post('/api/mercadopago', {
-    //         products: cart,
-    //     });
+        // const response = await axios.post('/api/mercadopago', {
+            // products: cart,
+        // });
     // }
+
+    const handleMercadoPagoPayment = async () => {
+        const response = await axios.post('/api/test', cart);
+
+        console.log(response);
+    }
 
     const HandleBack = () => {
         setStep((step) => step - 1);
@@ -100,6 +106,22 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
             setProductsWithCartValues();
         }
     }
+
+    const removeDuplicates = (array: CartItems[]): CartItems[] => {
+        const ids: string[] = [];
+        const result: CartItems[] = [];
+    
+        array.forEach((item: CartItems) => {
+          if (!ids.includes(item.id)) {
+            ids.push(item.id);
+            result.push(item);
+          }
+        });
+    
+        return result;
+      }
+    
+    const parsedCart = removeDuplicates(cart);
 
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         if (step !== Steps.Payment) {
@@ -203,7 +225,7 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
                 <Heading title="¿Algo más que nos quieras decir?" subtitle="Asegurate de que sean correctos" />
                 <div className="flex flex-col gap-4">
                     {
-                        cart.map((item: CartItems, index: number) => (
+                        parsedCart.map((item: CartItems, index: number) => (
                             <ItemsCart
                                 key={index}
                                 id={item.id}
@@ -258,7 +280,7 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
                     {
                         watch('paymentMethod') === 'cash' && (
                             <Input
-                                label="¿Con cuanto vas a pagar?"
+                                label={`Con cuanto vas a pagar? (Total: $${totalFn})`}
                                 id="cash"
                                 register={register}
                                 required
@@ -266,17 +288,18 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
                                 formatPrice
                                 type="number"
                             />
-
-
                         )
                     }
-                    {/* {
+                    {
                         watch('paymentMethod') === 'online' && (
-                            <MercadoPagoButton
-                                products={cart}
-                            />
+                            <button
+                                className="bg-blue-500 text-white rounded-md p-2"
+                                onClick={handleMercadoPagoPayment}
+                            >
+                                Pagar con Mercado Pago
+                            </button>
                         )
-                    } */}
+                    }
                 </div>
             </div>
         )

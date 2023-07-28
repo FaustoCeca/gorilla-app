@@ -12,7 +12,6 @@ const OrderCart = () => {
   const { cart, clearCart, removeFromCart } = useCart();
   const { onOpen } = useOrderModal();
 
-
   const calcQuantity = (id: string): number | undefined => {
     let quantity = 0;
     
@@ -25,12 +24,29 @@ const OrderCart = () => {
     return quantity;
   }
 
+  // En el carrito no puede haber dos productos iguales
+  const removeDuplicates = (array: CartItems[]): CartItems[] => {
+    const ids: string[] = [];
+    const result: CartItems[] = [];
+
+    array.forEach((item: CartItems) => {
+      if (!ids.includes(item.id)) {
+        ids.push(item.id);
+        result.push(item);
+      }
+    });
+
+    return result;
+  }
+
+  const parsedCart = removeDuplicates(cart);
+
   return (
     <div className="border-gray-400 border-[1px] p-2">
         <div className="flex flex-col gap-3 text-left">
           <div>
             {
-             cart.map((item: CartItems, index: number) => (
+             parsedCart.map((item: CartItems, index: number) => (
               <ItemsCart
                 key={index}
                 id={item.id}
