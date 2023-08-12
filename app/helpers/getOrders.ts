@@ -4,7 +4,7 @@ export const getOrders = async () => {
     try {
         const orders = await prisma.order.findMany({
             orderBy: {
-                id: 'asc'
+                id: 'desc'
             }
         });
 

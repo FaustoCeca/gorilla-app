@@ -1,9 +1,10 @@
 import mercadopago from "mercadopago";
+import { NextResponse } from "next/server";
 
 export async function POST (req: Request, res: Response) {
     const URL = "https://localhost:3000";
     
-    console.log(req.body);
+    // const { products } = req.body;
 
     // try {
     //     const preference = {
@@ -30,4 +31,6 @@ export async function POST (req: Request, res: Response) {
     // } catch (error) {
         
     // }
+
+    return NextResponse.json(req.body);
 }

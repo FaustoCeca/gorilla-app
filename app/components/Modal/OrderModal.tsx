@@ -83,16 +83,11 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
         return quantity;
     }
 
-    // const mercadoPagoPayment = async () => {
-        // const response = await axios.post('/api/mercadopago', {
-            // products: cart,
-        // });
-    // }
+    const handleMercadoPagoPayment = async (cart: CartItems[]) => {
+        const response = await axios.post('/api/mercadopago/create-preference', {
+            products: cart,
+        }).then((res) => console.log(res.data));
 
-    const handleMercadoPagoPayment = async () => {
-        const response = await axios.post('/api/test', cart);
-
-        console.log(response);
     }
 
     const HandleBack = () => {
@@ -294,7 +289,7 @@ const OrderModal = ({ branchName }: OrderModalProps) => {
                         watch('paymentMethod') === 'online' && (
                             <button
                                 className="bg-blue-500 text-white rounded-md p-2"
-                                onClick={handleMercadoPagoPayment}
+                                onClick={handleMercadoPagoPayment(cart)}
                             >
                                 Pagar con Mercado Pago
                             </button>
